@@ -53,13 +53,18 @@
                         <!-- Element Value -->
                         <StackPanel Margin="0 5 0 0" Grid.Column="0">
                             <TextBlock Text="Element Value" FontSize="16" FontWeight="Bold"/>
-                            <TextBox Width="500" Height="130" Padding="10"/>
+                            <TextBox x:Name="TextElementValue" Width="500" Height="130" Padding="10"/>
                         </StackPanel>
 
-                        <!-- Element Weight -->
                         <StackPanel Margin="0 5 0 0" Grid.Column="1">
+                            <!-- Element Weight -->
                             <TextBlock Text="Element Weight" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Height="130" FontSize="40" Padding="10"
+                            <TextBox x:Name="TextElementWeight" Height="60" FontSize="40" Padding="10 5"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                            
+                            <!-- Element Tag -->
+                            <TextBlock Text="Element Tag" FontSize="14" FontWeight="Bold"/>
+                            <TextBox x:Name="TextElementTag" Height="40" FontSize="20" Padding="10 5"
                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </Grid>
