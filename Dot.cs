@@ -116,7 +116,6 @@ namespace Sekai {
         #endregion
 
         #region Meta-Properties
-        public string DirectoryPath { get; set; }
         public string SavePath { get; set; }
         public string ClassType { get; set; }
         public string ImagePath { get; set; }
@@ -130,13 +129,12 @@ namespace Sekai {
             ClassType = classType[classType.Length - 1];
 
             // Base directory of this type of object. Useful with the sub-classes
-            DirectoryPath = Database.DPath + "\\" + ClassType;
-            if (!System.IO.Directory.Exists(DirectoryPath)) System.IO.Directory.CreateDirectory(DirectoryPath);
-            DirectoryInfo DI = new DirectoryInfo(DirectoryPath);
+            if (!System.IO.Directory.Exists($"{Database.DPath}\\{ClassType}"))
+                System.IO.Directory.CreateDirectory($"{Database.DPath}\\{ClassType}");
+            DirectoryInfo DI = new DirectoryInfo($"{Database.DPath}\\{ClassType}");
 
             // Create a new unique ID for this object.
             _ID = ClassType + DI.GetFiles().Length;
-            SavePath = DirectoryPath + "\\" + ID + ".bin";
 
             // Default information
             _Name = $"{ClassType} Name";
@@ -181,22 +179,7 @@ namespace Sekai {
         }
         #endregion
 
-        #region Serialization
-        public void SerializeFile() {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(SavePath, FileMode.Create, FileAccess.Write);
-            formatter.Serialize(stream, this);
-            stream.Close();
-        }
-        public static T DeserializeFile<T>(string FileID) where T : Dot {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(
-                $"{Database.DPath}\\{FileID.Substring(0, 3)}\\{FileID}.bin",
-                FileMode.Open,
-                FileAccess.Read);
-            return (T)formatter.Deserialize(stream);
-        }
-        #endregion
+        
 
 
         // ---------------- ---------------- ---------------- ---------------- ---------------- //

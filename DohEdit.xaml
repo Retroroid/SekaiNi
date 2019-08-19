@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="DohEdit" Height="650" Width="1020">
+        Title="DohEdit" Height="650" Width="1420">
     <Border Margin="10">
         <StackPanel>
             <!-- Name, ID, description-->
@@ -20,16 +20,17 @@
                          Text="{Binding Path=Description, Mode=TwoWay}"/>
             </StackPanel>
 
-            <!-- -->
+            <!-- Content -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Column 1 -->
-                <StackPanel Grid.Column="0">
-                    
+                <!-- Column 1 (Stuff) -->
+                <StackPanel Grid.Column="0" Margin="0 0 10 0">
+
                     <!-- Notes List -->
                     <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
                           FontSize="12" Grid.Column="0" Height="150" Padding="2"
@@ -38,7 +39,7 @@
                             <DataGridTextColumn Header="Note" Width="90" Binding="{Binding Title}"/>
                             <DataGridTextColumn Header="Date" Width="90" Binding="{Binding Time}"/>
                             <DataGridTextColumn Header="Tag" Width="90" Binding="{Binding Tag}"/>
-                            <DataGridTextColumn Header="Text" Width="300" Binding="{Binding Text}"/>
+                            <DataGridTextColumn Header="Text" Width="290" Binding="{Binding Text}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -48,17 +49,17 @@
                             <ColumnDefinition Width="4*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!-- Element Value -->
                         <StackPanel Margin="0 5 0 0" Grid.Column="0">
-                            <TextBlock Text="Element Value" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Width="500" Height="100"/>
+                            <TextBlock Text="Element Value" FontSize="16" FontWeight="Bold"/>
+                            <TextBox Width="500" Height="130" Padding="10"/>
                         </StackPanel>
-                        
+
                         <!-- Element Weight -->
                         <StackPanel Margin="0 5 0 0" Grid.Column="1">
                             <TextBlock Text="Element Weight" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Height="100" FontSize="40" Padding="10"
+                            <TextBox Height="130" FontSize="40" Padding="10"
                                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </Grid>
@@ -68,31 +69,97 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <!-- Add Button-->
-                        <Button x:Name="ButnAdd" Grid.Column="0" Height="40" Margin="20 0" 
-                                Content="Add" FontSize="24"/>
+                        <Button x:Name="ButnAdd" Grid.Column="0" Height="30" Margin="20 0" 
+                                Content="Add" FontSize="20" Width="130"/>
                         <!-- Delete Button-->
-                        <Button x:Name="ButnDelete" Grid.Column="1" Height="40" Margin="20 0"
-                                Content="Delete" FontSize="24"/>
+                        <Button x:Name="ButnDelete" Grid.Column="1" Height="30" Margin="20 0"
+                                Content="Delete" FontSize="20" Width="130"/>
+                        <!-- Roll Button -->
+                        <Button x:Name="ButnRoll" Grid.Column="2" Height="30" Margin="20 0"
+                                Content="Roll !" FontSize="20" Width="130"/>
                     </Grid>
+
+                    <!-- Parent-Child -->
+                    <Border BorderBrush="LightGray" BorderThickness="1" Margin="0 30 0 0">
+                        <Grid Margin="0 15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Parent -->
+                            <StackPanel Grid.Column="0" Margin="10 0 5 0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FontSize="24" Text="Parent" Grid.Column="0"/>
+                                    <Button x:Name="ButnGoToParent" Height="25" Width="50" Grid.Column="1"
+                                            Content="Goto"/>
+                                    <Button x:Name="ButnChooseParent" Height="25" Width="100" Grid.Column="2"
+                                        Content="Select List..."/>
+                                </Grid>
+                                <TextBox x:Name="TextParent" FontSize="30"/>
+                            </StackPanel>
+
+                            <!-- Child -->
+                            <StackPanel Grid.Column="1" Margin="5 0 10 0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock FontSize="24" Text="Child" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                    <Button x:Name="ButnGoToChild" Height="25" Width="50" Grid.Column="1"
+                                            Content="Goto"/>
+                                    <Button x:Name="ButnChooseChild" Height="25" Width="100" Grid.Column="2"
+                                        Content="Select List..." Margin="19,4"/>
+                                </Grid>
+                                <TextBox x:Name="TextChild" FontSize="30"/>
+                            </StackPanel>
+
+                        </Grid>
+                    </Border>
+
                 </StackPanel>
 
-                <!-- Roll Table -->
+                <!-- Column 2 (Roll list) -->
                 <StackPanel Grid.Column="1">
                     <!-- Roll List-->
                     <DataGrid Name="ListRolls" HorizontalAlignment="Left" Margin="0, 5" 
                           FontSize="12" Grid.Column="0" Height="500" Padding="2" 
                               ItemsSource="{Binding Elements}" AutoGenerateColumns="False">
+
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Rang." Width="45" Binding="{Binding Title}"/>
-                            <DataGridTextColumn Header="Wgt" Width="45" Binding="{Binding Time}"/>
-                            <DataGridTextColumn Header="Value" Width="290" Binding="{Binding Tag}"/>
+                            <DataGridTextColumn Header="Rang." Width="45" Binding="{Binding Weight}" />
+                            <DataGridTextColumn Header="Wgt" Width="45" Binding="{Binding Weight}"/>
+                            <DataGridTextColumn Header="Value" Width="290" Binding="{Binding Value}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
+                
+                <!-- Column 3 (Roll Result) -->
+                <StackPanel Grid.Column="2">
+                    <TextBox x:Name="TextResults" Height="400" Margin="0 5"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="RollFull" Height="30" Width="170" Margin="10" 
+                                Grid.Column="0" Content="Full roll from current" FontSize="16"/>
+                        <Button x:Name="RollExport" Height="30" Width="170" Margin="10" 
+                                Grid.Column="1" Content="Export Roll" FontSize="20"/>
+                    </Grid>
+                </StackPanel>
             </Grid>
-        </StackPanel>
+        </StackPanel> <!-- End All -->
     </Border>
 </Window>

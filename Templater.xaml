@@ -1,0 +1,26 @@
+﻿<Window x:Class="SekaiNi.Templater"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SekaiNi"
+        mc:Ignorable="d"
+        Title="Templater" Height="1000" Width="800">
+    <Border Margin="10">
+        <StackPanel>
+            <!-- Name, ID, description-->
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="TextName" HorizontalAlignment="Left" Width="550" Height="80" 
+                         FontSize="40" FontFamily="Algerian" TextWrapping="Wrap"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding Path=Name, Mode=TwoWay}"/>
+
+                <TextBox x:Name="TextDescription" HorizontalAlignment="Left" Width="450" Height="80"
+                         FontSize="12" 
+                         Text="{Binding Path=Description, Mode=TwoWay}"/>
+            </StackPanel>
+            
+            
+        </StackPanel>
+    </Border>
+</Window>
