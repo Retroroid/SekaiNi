@@ -7,46 +7,63 @@
         mc:Ignorable="d"
         Title="Templater" Height="800" Width="1400">
     <StackPanel>
-        <!-- Window Menu -->
-        <Menu Height="20">
-            <MenuItem Header="File">
+        <!-- #region Window Menu Bar -->
+        <Menu Height="28">
+            <MenuItem Header="File" FontSize="16" Margin="10 2 0 0">
                 <MenuItem Header="Save" Click="MenuItemSave_Click"/>
                 <Separator/>
                 <MenuItem Header="Load" Click="MenuItemLoad_Click"/>
             </MenuItem>
         </Menu>
+        <!-- #endregion -->
         
-        <!-- Window Content -->
+        <!-- #region Title Block -->
         <Border Margin="10">
-            <!-- Name, ID, description-->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="674*"/>
+                    <ColumnDefinition Width="229*"/>
+                    <ColumnDefinition Width="457*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="tbDescription" Grid.Column="2"
-                         FontSize="12" Padding="10" Margin="0 20 0 0"
-                         VerticalContentAlignment="Top" 
-                         HorizontalContentAlignment="Left"
-                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
-                         Text="{Binding ViewItem.Description, Mode=TwoWay}"/>
-                <TextBox x:Name="tbID" Grid.Column="1" Margin="0 20 10 0"
-                         FontSize="36" Padding="10"
-                         VerticalContentAlignment="Center" 
-                         HorizontalContentAlignment="Center"
-                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
-                         Text="{Binding ViewItem.ID, Mode=TwoWay}"/>
-
-                <TextBox x:Name="tbName" Grid.Column="0" Margin="0 20 10 0"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- #region Name TextBox -->
+                <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbName" Grid.Column="0" Margin="0,21,10,0.163"
                          FontSize="40" FontFamily="Algerian" Padding="5"
-                         VerticalContentAlignment="Center" 
-                         HorizontalContentAlignment="Center"
-                         Text="{Binding ViewItem.Name, Mode=TwoWay}"/>
-                <TextBlock Text="Name" Grid.Column="0" FontSize="16" FontWeight="DemiBold"/>
-                <TextBlock Text="ID" Grid.Column="1" FontSize="16" FontWeight="DemiBold"/>
-                <TextBlock Text="Description" Grid.Column="2" FontSize="16" FontWeight="DemiBold"/>
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding ViewItem.Name, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+                <!-- #region ID TextBox -->
+                <TextBlock Text="ID" Grid.Column="2" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbID" Grid.Column="2" Margin="0,21,10,0.163"
+                         FontSize="36" Padding="10"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding ViewItem.ID, Mode=TwoWay}" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+                <!-- #region Description TextBox -->
+                <TextBlock Text="Description" Grid.Column="3" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
+                <Border Name="Placeholder" Grid.Column="3" Margin="0,21,0,0.163" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbDescription" Grid.Column="3"
+                         FontSize="12" Padding="10" Margin="0,21,10,0.163"
+                         VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                         Text="{Binding ViewItem.Description, Mode=TwoWay}" 
+                         VerticalScrollBarVisibility="Auto"
+                         MaxHeight="{Binding ElementName=Placeholder, Path=ActualHeight}" Grid.RowSpan="2"/>
+                <!-- #endregion -->
             </Grid>
         </Border>
+        <!-- #endregion -->
+        <Separator Margin="3 0"/>
+        
+        
     </StackPanel>
 </Window>
