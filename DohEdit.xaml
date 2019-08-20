@@ -5,19 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="DohEdit" Height="650" Width="1420">
+        Title="DohEdit" Height="700" Width="1420">
+
     <Border Margin="10">
         <StackPanel>
+            <Menu Height="20" Margin="5">
+                <MenuItem Header="File">
+                    <MenuItem Header="Save" Click="MenuItemSave_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Load" Click="MenuItemLoad_Click"/>
+                </MenuItem>
+            </Menu>
             <!-- Name, ID, description-->
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="TextName" HorizontalAlignment="Left" Width="550" Height="80" 
                          FontSize="40" FontFamily="Algerian" TextWrapping="Wrap"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                         Text="{Binding Path=Name, Mode=TwoWay}"/>
+                         Text="{Binding Path=ViewItem.Name, Mode=TwoWay}"/>
 
                 <TextBox x:Name="TextDescription" HorizontalAlignment="Left" Width="450" Height="80"
                          FontSize="12" 
-                         Text="{Binding Path=Description, Mode=TwoWay}"/>
+                         Text="{Binding Path=ViewItem.Description, Mode=TwoWay}"/>
+                <TextBox x:Name="TextID" HorizontalAlignment="Left" Width="390" Height="80"
+                         FontSize="36" 
+                         Text="{Binding Path=ViewItem.ID, Mode=TwoWay}"/>
             </StackPanel>
 
             <!-- Content -->
@@ -34,7 +45,7 @@
                     <!-- Notes List -->
                     <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
                           FontSize="12" Grid.Column="0" Height="150" Padding="2"
-                              ItemsSource="{Binding Notes}" AutoGenerateColumns="False">
+                              ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Note" Width="90" Binding="{Binding Title}"/>
                             <DataGridTextColumn Header="Date" Width="90" Binding="{Binding Time}"/>
@@ -53,19 +64,22 @@
                         <!-- Element Value -->
                         <StackPanel Margin="0 5 0 0" Grid.Column="0">
                             <TextBlock Text="Element Value" FontSize="16" FontWeight="Bold"/>
-                            <TextBox x:Name="TextElementValue" Width="500" Height="130" Padding="10"/>
+                            <TextBox x:Name="TextElementValue" Width="500" Height="130" Padding="10"
+                                     Text="{Binding Path=ViewElement.Value, Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Margin="0 5 0 0" Grid.Column="1">
                             <!-- Element Weight -->
                             <TextBlock Text="Element Weight" FontSize="14" FontWeight="Bold"/>
                             <TextBox x:Name="TextElementWeight" Height="60" FontSize="40" Padding="10 5"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                            
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                     Text="{Binding Path=ViewElement.Weight, Mode=TwoWay}"/>
+
                             <!-- Element Tag -->
                             <TextBlock Text="Element Tag" FontSize="14" FontWeight="Bold"/>
                             <TextBox x:Name="TextElementTag" Height="40" FontSize="20" Padding="10 5"
-                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                     Text="{Binding Path=ViewElement.Tag, Mode=TwoWay}"/>
                         </StackPanel>
                     </Grid>
 
@@ -79,17 +93,18 @@
 
                         <!-- Add Button-->
                         <Button x:Name="ButnAdd" Grid.Column="0" Height="30" Margin="20 0" 
-                                Content="Add" FontSize="20" Width="130"/>
+                                Content="Add" FontSize="20" Width="130" Click="ButnAdd_Click"/>
                         <!-- Delete Button-->
                         <Button x:Name="ButnDelete" Grid.Column="1" Height="30" Margin="20 0"
-                                Content="Delete" FontSize="20" Width="130"/>
+                                Content="Delete" FontSize="20" Width="130" Click="ButnDelete_Click"/>
                         <!-- Roll Button -->
                         <Button x:Name="ButnRoll" Grid.Column="2" Height="30" Margin="20 0"
-                                Content="Roll !" FontSize="20" Width="130"/>
+                                Content="Roll !" FontSize="20" Width="130" Click="ButnRoll_Click"/>
                     </Grid>
 
                     <!-- Parent-Child -->
-                    <Border BorderBrush="LightGray" BorderThickness="1" Margin="0 30 0 0">
+                    <Border BorderBrush="LightGray" BorderThickness="1" Margin="0 30 0 0" 
+                            IsEnabled="False">
                         <Grid Margin="0 15">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -140,29 +155,36 @@
                     <!-- Roll List-->
                     <DataGrid Name="ListRolls" HorizontalAlignment="Left" Margin="0, 5" 
                           FontSize="12" Grid.Column="0" Height="500" Padding="2" 
-                              ItemsSource="{Binding Elements}" AutoGenerateColumns="False">
+                              ItemsSource="{Binding Path=ViewItem.Elements, Mode=TwoWay}" AutoGenerateColumns="False"
+                              SelectedItem="{Binding Path=ViewElement, Mode=TwoWay}">
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Rang." Width="45" Binding="{Binding Weight}" />
                             <DataGridTextColumn Header="Wgt" Width="45" Binding="{Binding Weight}"/>
-                            <DataGridTextColumn Header="Value" Width="290" Binding="{Binding Value}"/>
+                            <DataGridTextColumn Header="Value" Width="230" Binding="{Binding Value}"/>
+                            <DataGridTextColumn Header="Tag" Width="45" Binding="{Binding Tag}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
-                
+
                 <!-- Column 3 (Roll Result) -->
                 <StackPanel Grid.Column="2">
-                    <TextBox x:Name="TextResults" Height="400" Margin="0 5"/>
+                    <TextBox x:Name="TextResults" Height="400" Margin="0 5" Padding="5" 
+                             AcceptsReturn="True" AcceptsTab="True"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="RollFull" Height="30" Width="170" Margin="10" 
-                                Grid.Column="0" Content="Full roll from current" FontSize="16"/>
+                                Grid.Column="0" Content="Full roll from current" FontSize="16"
+                                IsEnabled="False"/>
                         <Button x:Name="RollExport" Height="30" Width="170" Margin="10" 
-                                Grid.Column="1" Content="Export Roll" FontSize="20"/>
+                                Grid.Column="1" Content="Export Roll" FontSize="20"
+                                IsEnabled="False"/>
                     </Grid>
+                    <Button x:Name="ButnImport" Height="30" Width="170" Content="Import to d100"
+                            FontSize="20" Click="ButnImport_Click"/>
                 </StackPanel>
             </Grid>
         </StackPanel> <!-- End All -->

@@ -13,17 +13,19 @@ namespace SekaiNi {
         #region Serialization
         public static void SerializeToFile<T>(this T ViewItem) where T:Sekai.Dot {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream($"{Sekai.Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ClassType}{ViewItem.ID}.bin",
+            Stream stream = new FileStream($"{Sekai.Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin",
                 FileMode.Create, FileAccess.Write);
             formatter.Serialize(stream, ViewItem);
             stream.Close();
         }
-        public static T DeserializeFileByID<T>(string FileID) where T : Sekai.Dot {
+        public static T DeserializeFileByID<T>(this T ViewItem) where T : Sekai.Dot {
+            if (ViewItem is null) {
+                throw new ArgumentNullException(nameof(ViewItem));
+            }
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(
-                $"{Sekai.Database.DPath}\\{FileID.Substring(0, 3)}\\{FileID}.bin",
-                FileMode.Open,
-                FileAccess.Read);
+                $"{Sekai.Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin",
+                FileMode.Open, FileAccess.Read);
             return (T)formatter.Deserialize(stream);
         }
         #endregion

@@ -10,12 +10,10 @@ namespace Sekai {
     [Serializable]
     public class Note : INotifyPropertyChanged {
         #region Property Changed Event
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string nam) {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) {
-                handler(this, new PropertyChangedEventArgs(nam));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
 
@@ -70,13 +68,10 @@ namespace Sekai {
         // ---------------- Variables ---------------- ---------------- //
 
         #region Property Changed Event
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged; 
-
         protected void OnPropertyChanged(string nam) {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null){
-                handler(this, new PropertyChangedEventArgs(nam));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
 
@@ -112,11 +107,19 @@ namespace Sekai {
         }
         private string _Description;
 
-        public List<Note> Notes { get; set; }
+        public List<Note> Notes {
+            get { return _Notes; }
+            set {
+                if (value != _Notes) {
+                    _Notes = value;
+                    OnPropertyChanged("Notes");
+                }
+            }
+        }
+        private List<Note> _Notes;
         #endregion
 
         #region Meta-Properties
-        public string SavePath { get; set; }
         public string ClassType { get; set; }
         public string ImagePath { get; set; }
         #endregion
@@ -139,13 +142,27 @@ namespace Sekai {
             // Default information
             _Name = $"{ClassType} Name";
             _Description = "A short expose of what this is.";
-            ImagePath = String.Empty;
+            ImagePath = string.Empty;
 
             // Initialize list
             Notes = new List<Note>();
         }
 
         // ---------------- Methods ---------------- ---------------- //
+
+
+        // ---------------- Meta-Methods ---------------- ---------------- //
+        #region Implementation / Override
+        public int CompareTo(Dot obj) {
+            // CompareTo for sorting implementation.
+            if (obj == null) return 1;
+            return string.Compare(ID, obj.ID);
+        }
+        override public string ToString() {
+            return ID + ":" + Name;
+        }
+        #endregion
+
         #region Get-Set-Property by Name
         public object this[string propertyName] {
             get {
@@ -166,20 +183,6 @@ namespace Sekai {
             return this[field];
         }
         #endregion
-
-        // ---------------- Meta-Methods ---------------- ---------------- //
-        #region Implementation / Override
-        public int CompareTo(Dot obj) {
-            // CompareTo for sorting implementation.
-            if (obj == null) return 1;
-            return string.Compare(ID, obj.ID);
-        }
-        override public string ToString() {
-            return ID + ":" + Name;
-        }
-        #endregion
-
-        
 
 
         // ---------------- ---------------- ---------------- ---------------- ---------------- //

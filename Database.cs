@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Sekai {
-    class Database {
+    [Serializable]
+    public class Database {
         // ---------------- Variables ---------------- ---------------- //
         public static string DPath;
         public static Font DFont;

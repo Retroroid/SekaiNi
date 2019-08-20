@@ -5,22 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="Templater" Height="1000" Width="800">
-    <Border Margin="10">
-        <StackPanel>
+        Title="Templater" Height="800" Width="1400">
+    <StackPanel>
+        <!-- Window Menu -->
+        <Menu Height="20">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Click="MenuItemSave_Click"/>
+                <Separator/>
+                <MenuItem Header="Load" Click="MenuItemLoad_Click"/>
+            </MenuItem>
+        </Menu>
+        
+        <!-- Window Content -->
+        <Border Margin="10">
             <!-- Name, ID, description-->
-            <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="TextName" HorizontalAlignment="Left" Width="550" Height="80" 
-                         FontSize="40" FontFamily="Algerian" TextWrapping="Wrap"
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                         Text="{Binding Path=Name, Mode=TwoWay}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbDescription" Grid.Column="2"
+                         FontSize="12" Padding="10" Margin="0 20 0 0"
+                         VerticalContentAlignment="Top" 
+                         HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                         Text="{Binding ViewItem.Description, Mode=TwoWay}"/>
+                <TextBox x:Name="tbID" Grid.Column="1" Margin="0 20 10 0"
+                         FontSize="36" Padding="10"
+                         VerticalContentAlignment="Center" 
+                         HorizontalContentAlignment="Center"
+                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                         Text="{Binding ViewItem.ID, Mode=TwoWay}"/>
 
-                <TextBox x:Name="TextDescription" HorizontalAlignment="Left" Width="450" Height="80"
-                         FontSize="12" 
-                         Text="{Binding Path=Description, Mode=TwoWay}"/>
-            </StackPanel>
-            
-            
-        </StackPanel>
-    </Border>
+                <TextBox x:Name="tbName" Grid.Column="0" Margin="0 20 10 0"
+                         FontSize="40" FontFamily="Algerian" Padding="5"
+                         VerticalContentAlignment="Center" 
+                         HorizontalContentAlignment="Center"
+                         Text="{Binding ViewItem.Name, Mode=TwoWay}"/>
+                <TextBlock Text="Name" Grid.Column="0" FontSize="16" FontWeight="DemiBold"/>
+                <TextBlock Text="ID" Grid.Column="1" FontSize="16" FontWeight="DemiBold"/>
+                <TextBlock Text="Description" Grid.Column="2" FontSize="16" FontWeight="DemiBold"/>
+            </Grid>
+        </Border>
+    </StackPanel>
 </Window>

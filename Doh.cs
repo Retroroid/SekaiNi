@@ -4,29 +4,17 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace SekaiNi {
-    [ValueConversion(typeof(string), typeof(Doh))] // [ID, Doh]
-    public class DohConverter : IValueConverter {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) {
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            return ((Doh)value).ID;
-        }
-    }
-
     [Serializable]
     public class Element : IComparable, INotifyPropertyChanged {
         #region Property Changed Event
+        [field: NonSerialized]
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string nam) {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) {
-                handler(this, new PropertyChangedEventArgs(nam));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
 
@@ -60,10 +48,17 @@ namespace SekaiNi {
                 }
             }
         }
-        private string _Tag; 
+        private string _Tag;
         #endregion
 
         public Element() { }
+        public Element(Element El) {
+            if (El != null) {
+                Weight = El.Weight;
+                if (El.Value != null) { Value = El.Value; }
+                if (El.Tag != null) { Tag = El.Tag; }
+            }
+        }
         public int CompareTo(object Obj) {
             int ReturnInt;
             Element el = Obj as Element;
@@ -75,9 +70,18 @@ namespace SekaiNi {
     }
 
     [Serializable]
-    public class Doh : Sekai.Dot  {
+    public class Doh : Sekai.Dot {
         // ---------------- Variables ---------------- ---------------- //
-        public List<Element> Elements { get; set; }
+        public List<Element> Elements {
+            get { return _Elements; }
+            set {
+                if (value != _Elements) {
+                    _Elements = value;
+                    OnPropertyChanged("Elements");
+                }
+            }
+        }
+        private List<Element> _Elements;
         public Doh Parent { get; set; }
         public Doh Child { get; set; }
 
@@ -105,14 +109,6 @@ namespace SekaiNi {
             }
             return Elements[0];
         }
-        public void AddToList(int eWeight, string eTag, string eValue) {
-            Elements.Add(new Element { Weight = eWeight, Tag = eTag, Value = eValue });
-        }
-        public void DeleteFromList(List<int> Indices) {
-            while(Indices.Count > 0) {
-
-            }
-        }
 
         #region Node Manipulation
         public void CreateChildNode() {
@@ -132,7 +128,7 @@ namespace SekaiNi {
                 ToInsert.Child.Parent = ToInsert;
                 Child = ToInsert;
             }
-        } 
+        }
         #endregion
 
         // ---------------- ---------------- ---------------- ---------------- //
