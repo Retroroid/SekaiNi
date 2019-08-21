@@ -28,7 +28,7 @@ namespace SekaiNi {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
-        public Sekai.Dot ViewItem {
+        public Dot ViewItem {
             get { return _ViewItem; }
             set {
                 if (value != _ViewItem) {
@@ -37,15 +37,15 @@ namespace SekaiNi {
                 }
             }
         }
-        private Sekai.Dot _ViewItem;
+        private Dot _ViewItem;
 
         // ---------------- Constructors ---------------- ---------------- //
         public Templater() {
-            ViewItem = new Sekai.Dot();
+            ViewItem = new Dot();
             InitializeComponent();
             DataContext = this;
         }
-        public Templater(Sekai.Dot ViewItem) {
+        public Templater(Dot ViewItem) {
             this.ViewItem = ViewItem;
             InitializeComponent();
             DataContext = this;
@@ -53,8 +53,8 @@ namespace SekaiNi {
         // ---------------- Methods ---------------- ---------------- //
         private void MenuItemSave_Click(object sender, RoutedEventArgs e) {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}";
-            sfd.FileName = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin";
+            sfd.InitialDirectory = $"{Database.DPath}\\{ViewItem.ClassType}";
+            sfd.FileName = $"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin";
             sfd.OverwritePrompt = true;
             if (sfd.ShowDialog() == true) {
                 ViewItem.ID = Regex.Match(sfd.SafeFileName, @"(.*)\.").Value.TrimEnd('.');
@@ -63,7 +63,7 @@ namespace SekaiNi {
         }
         private void MenuItemLoad_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}";
+            ofd.InitialDirectory = $"{Database.DPath}\\{ViewItem.ClassType}";
             if (ofd.ShowDialog() == true) {
                 string[] FilePath = ofd.FileName.Split('\\');
                 string st = Regex.Match(FilePath[FilePath.Length - 1], @"(.*)\.").Value.TrimEnd('.');

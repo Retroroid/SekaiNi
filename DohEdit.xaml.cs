@@ -56,10 +56,10 @@ namespace SekaiNi {
             DataContext = this;
         }
         public void AddSomeData() {
-            ViewItem.Notes.Add(new Sekai.Note { Title = "Note 1 Name!", Time = "Note 1 Time!", Tag = "Note 1 Tag!", Text = "Note 1 Text!" });
-            ViewItem.Notes.Add(new Sekai.Note { Title = "Note 2 Name!", Time = "Note 2 Time!", Tag = "Note 2 Tag!", Text = "Note 2 Text!" });
-            ViewItem.Notes.Add(new Sekai.Note { Title = "Note 3 Name!", Time = "Note 3 Time!", Tag = "Note 3 Tag!", Text = "Note 3 Text!" });
-            ViewItem.Notes.Add(new Sekai.Note { Title = "Note 4 Name!", Time = "Note 4 Time!", Tag = "Note 4 Tag!", Text = "Note 4 Text!" });
+            ViewItem.Notes.Add(new Note { Title = "Note 1 Name!", Time = "Note 1 Time!", Tag = "Note 1 Tag!", Text = "Note 1 Text!" });
+            ViewItem.Notes.Add(new Note { Title = "Note 2 Name!", Time = "Note 2 Time!", Tag = "Note 2 Tag!", Text = "Note 2 Text!" });
+            ViewItem.Notes.Add(new Note { Title = "Note 3 Name!", Time = "Note 3 Time!", Tag = "Note 3 Tag!", Text = "Note 3 Text!" });
+            ViewItem.Notes.Add(new Note { Title = "Note 4 Name!", Time = "Note 4 Time!", Tag = "Note 4 Tag!", Text = "Note 4 Text!" });
             ViewItem.Elements.Add(new Element { Tag = "Bad", Weight = 10, Value = "PC explodes" });
             ViewItem.Elements.Add(new Element { Tag = "Bad", Weight = 20, Value = "PC is dismembered" });
             ViewItem.Elements.Add(new Element { Tag = "Bad", Weight = 40, Value = "PC dies of blood loss" });
@@ -95,19 +95,21 @@ namespace SekaiNi {
         }
 
         private void MenuItemSave_Click(object sender, RoutedEventArgs e) {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}";
-            sfd.FileName = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin";
-            sfd.OverwritePrompt = true;
+            SaveFileDialog sfd = new SaveFileDialog {
+                InitialDirectory = $"{Database.DPath}\\{ViewItem.ClassType}",
+                FileName = $"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin",
+                OverwritePrompt = true
+            };
             if (sfd.ShowDialog() == true) {
                 ViewItem.ID = Regex.Match(sfd.SafeFileName, @"(.*)\.").Value.TrimEnd('.');
                 ViewItem.SerializeToFile();
             }
         }
         private void MenuItemLoad_Click(object sender, RoutedEventArgs e) {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = $"{Sekai.Database.DPath}\\{ViewItem.ClassType}";
-            if(ofd.ShowDialog() == true) {
+            OpenFileDialog ofd = new OpenFileDialog {
+                InitialDirectory = $"{Database.DPath}\\{ViewItem.ClassType}"
+            };
+            if (ofd.ShowDialog() == true) {
                 string[] FilePath = ofd.FileName.Split('\\');
                 string st = Regex.Match(FilePath[FilePath.Length - 1], @"(.*)\.").Value.TrimEnd('.');
                 ViewItem.ID = st;

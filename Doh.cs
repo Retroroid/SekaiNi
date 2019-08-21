@@ -70,7 +70,7 @@ namespace SekaiNi {
     }
 
     [Serializable]
-    public class Doh : Sekai.Dot {
+    public class Doh : Dot {
         // ---------------- Variables ---------------- ---------------- //
         public List<Element> Elements {
             get { return _Elements; }

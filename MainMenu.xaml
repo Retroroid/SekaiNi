@@ -19,7 +19,7 @@
             <!-- Column 1 -->
             <StackPanel Grid.Column="0">
                 <Button Content="d100" Width="130" Height="30" Margin="0 20" 
-                        FontSize="18" FontFamily="Algerian" Click="d100Edit_Open"/>
+                        FontSize="18" FontFamily="Algerian" Click="D100Edit_Open"/>
             </StackPanel>
             <!-- Column 2 -->
             <StackPanel Grid.Column="1">

@@ -71,13 +71,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Fac.cs" />
+    <Compile Include="Cha.cs" />
+    <Compile Include="Evt.cs" />
+    <Compile Include="Est.cs" />
+    <Compile Include="Ghl.cs" />
+    <Compile Include="Itm.cs" />
+    <Compile Include="Loc.cs" />
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Template.cs" />
+    <Compile Include="Mdl.cs" />
     <Compile Include="Templater.xaml.cs">
       <DependentUpon>Templater.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_Miscellaneous.cs" />
     <Page Include="DohEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

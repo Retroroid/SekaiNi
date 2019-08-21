@@ -6,63 +6,11 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Sekai {
-    [Serializable]
-    public class Note : INotifyPropertyChanged {
-        #region Property Changed Event
-        [field: NonSerialized]
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string nam) {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
-        }
-        #endregion
+namespace SekaiNi {
+    
+    // ---------------- ---------------- ---------------- //
 
-        #region Properties
-        public string Title {
-            get { return _Title; }
-            set {
-                if (value != _Title) {
-                    _Title = value;
-                    OnPropertyChanged("Title");
-                }
-            }
-        }
-        private string _Title;
-        public string Time {
-            get { return _Time; }
-            set {
-                if (value != _Time) {
-                    _Time = value;
-                    OnPropertyChanged("Time");
-                }
-            }
-        }
-        private string _Time;
-        public string Tag {
-            get { return _Tag; }
-            set {
-                if (value != _Tag) {
-                    _Tag = value;
-                    OnPropertyChanged("Tag");
-                }
-            }
-        }
-        private string _Tag;
-        public string Text {
-            get { return _Text; }
-            set {
-                if (value != _Text) {
-                    _Text = value;
-                    OnPropertyChanged("Text");
-                }
-            }
-        }
-        private string _Text;
-        #endregion
-
-        public Note() { }
-    }
-
+    // ---------------- ---------------- ---------------- //
     [Serializable]
     public class Dot : IComparable<Dot>, INotifyPropertyChanged {
         // ---------------- Variables ---------------- ---------------- //
@@ -117,6 +65,16 @@ namespace Sekai {
             }
         }
         private List<Note> _Notes;
+        public Loc Location {
+            get { return _Location; }
+            set {
+                if (Location != _Location) {
+                    _Location = Location;
+                    OnPropertyChanged("Location");
+                }
+            }
+        }
+        private Loc _Location;
         #endregion
 
         #region Meta-Properties

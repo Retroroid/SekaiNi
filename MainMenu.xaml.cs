@@ -19,9 +19,9 @@ namespace SekaiNi {
     public partial class MainMenu : Window {
         public MainMenu() {
             InitializeComponent();
-            Sekai.Database.InitializeDatabase();
+            Database.InitializeDatabase();
         }
-        private void d100Edit_Open(object sender, RoutedEventArgs e) {
+        private void D100Edit_Open(object sender, RoutedEventArgs e) {
             new DohEdit().Show();
         }
         private void Editor_Open(object sender, RoutedEventArgs e) {
