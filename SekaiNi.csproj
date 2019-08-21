@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChaEdit.xaml.cs">
+      <DependentUpon>ChaEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataGridEditItem.xaml.cs">
       <DependentUpon>DataGridEditItem.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <DependentUpon>Templater.xaml</DependentUpon>
     </Compile>
     <Compile Include="_Misc.cs" />
+    <Page Include="ChaEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataGridEditItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

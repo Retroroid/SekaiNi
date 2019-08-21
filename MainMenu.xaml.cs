@@ -21,6 +21,9 @@ namespace SekaiNi {
             InitializeComponent();
             Database.InitializeDatabase();
         }
+        private void ChaEdit_Open(object sender, RoutedEventArgs e) {
+            new ChaEdit().Show();
+        }
         private void D100Edit_Open(object sender, RoutedEventArgs e) {
             new DohEdit().Show();
         }

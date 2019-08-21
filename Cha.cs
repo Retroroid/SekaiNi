@@ -249,6 +249,7 @@ namespace SekaiNi {
             CHA = new AS { Name = "CHA"};
 
             // Initialzie Skills
+            Skills = new AS[18];
             for (int i = 0; i < SkillList.Length; i++) {
                 Skills[i] = new AS {
                     Name = SkillList[i],
