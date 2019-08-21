@@ -9,7 +9,7 @@
 
     <Border Margin="10">
         <StackPanel>
-            <Menu Height="20" Margin="5">
+            <Menu Height="20" Margin="0 0 0 5">
                 <MenuItem Header="File">
                     <MenuItem Header="Save" Click="MenuItemSave_Click"/>
                     <Separator/>
@@ -21,14 +21,11 @@
                 <TextBox x:Name="TextName" HorizontalAlignment="Left" Width="550" Height="80" 
                          FontSize="40" FontFamily="Algerian" TextWrapping="Wrap"
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                         Text="{Binding Path=ViewItem.Name, Mode=TwoWay}"/>
+                         Text="{Binding Path=ViewItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <TextBox x:Name="TextDescription" HorizontalAlignment="Left" Width="450" Height="80"
+                <TextBox x:Name="TextDescription" HorizontalAlignment="Left" Width="500" Height="80"
                          FontSize="12" 
-                         Text="{Binding Path=ViewItem.Description, Mode=TwoWay}"/>
-                <TextBox x:Name="TextID" HorizontalAlignment="Left" Width="390" Height="80"
-                         FontSize="36" 
-                         Text="{Binding Path=ViewItem.ID, Mode=TwoWay}"/>
+                         Text="{Binding Path=ViewItem.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <!-- Content -->

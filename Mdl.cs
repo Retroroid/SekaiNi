@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SekaiNi {
+    [Serializable]
     public class Mdl : Dot {
         // ---------------- Variables ---------------- ---------------- //
         public List<Cha> Characters {

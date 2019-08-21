@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SekaiNi {
+    [Serializable]
     public class Ghl : Est {
         // ---------------- Variables ---------------- ---------------- //
         public List<Cha> CommonRoom {

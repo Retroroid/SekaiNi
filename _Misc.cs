@@ -57,6 +57,14 @@ namespace SekaiNi {
         }
         private string _Text;
         public Note() { }
+        public Note CloneObject() {
+            return new Note {
+                Title = Title,
+                Time = Time,
+                Tag = Tag,
+                Text = Text
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]

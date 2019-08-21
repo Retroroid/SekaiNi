@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataGridEditItem.xaml.cs">
+      <DependentUpon>DataGridEditItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fac.cs" />
     <Compile Include="Cha.cs" />
     <Compile Include="Evt.cs" />
@@ -85,7 +89,11 @@
     <Compile Include="Templater.xaml.cs">
       <DependentUpon>Templater.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_Miscellaneous.cs" />
+    <Compile Include="_Misc.cs" />
+    <Page Include="DataGridEditItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DohEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

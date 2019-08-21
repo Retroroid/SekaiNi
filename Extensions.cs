@@ -13,26 +13,23 @@ namespace SekaiNi {
         #region Serialization
         public static void SerializeToFile<T>(this T ViewItem) where T:Dot {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream($"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin",
+            Stream stream = new FileStream($"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ClassType}{ViewItem.Name}.bin",
                 FileMode.Create, FileAccess.Write);
             formatter.Serialize(stream, ViewItem);
             stream.Close();
         }
-        public static T DeserializeFileByID<T>(this T ViewItem) where T : Dot {
+        public static T DeserializeFile<T>(this T ViewItem) where T : Dot {
             if (ViewItem is null) {
                 throw new ArgumentNullException(nameof(ViewItem));
             }
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(
-                $"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ID}.bin",
+                $"{Database.DPath}\\{ViewItem.ClassType}\\{ViewItem.ClassType}{ViewItem.Name}.bin",
                 FileMode.Open, FileAccess.Read);
-            return (T)formatter.Deserialize(stream);
+            T obj = (T)formatter.Deserialize(stream);
+            return obj;
         }
         #endregion
-
-        // ---------------- ---------------- ---------------- ----------------//
-
-
         // ---------------- ---------------- ---------------- ----------------//
     } // End of class
 } // End of namespace
