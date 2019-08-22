@@ -1,24 +1,53 @@
 # SekaiNi
 Zyjacya
 
-SekaiNi is a free, open-source, and standalone world-engine and toolbox for use in D&D.
+SekaiNi is a free, open-source, and standalone world-engine and toolbox for use in D&D. Specifically, this tool is designed for use by 
+DMs in order to allow them to more easily generate, connect, and keep consistent smaller parts of a setting, allowing their
+attention to be devoted to subjects of larger scale and interest.
 
-Currently implemented:
-D100 Editor (Import lists from text, edit list item attributes, and rolling)
 
-Planned:
-
+---------------- ----------------
+Currently supported types:
+---------------- ----------------
 Character
+
 Establishment/Building
+
 Event
+
 Faction
-Generator
+
 Guildhall
+
 Item
+
 Location
+
 Module
 
-Each of these will have an Editor and Database Viewer.
+---------------- ----------------
+Planned types:
+---------------- ----------------
+Generator
 
-Additionally, these items will be able to be connected to each other and allow opening of the entity's editor from any place it is referenced.
-This is intended to allow quick reference and changes that result in a consistent and dynamic setting for D&D. 
+
+---------------- ---------------- ---------------- ----------------
+
+---------------- ---------------- ---------------- ----------------
+
+
+---------------- ----------------
+Implemented features:
+---------------- ---------------- 
+Editors
+
+---------------- ----------------
+Planned Features:
+---------------- ----------------
+Generators
+
+
+---------------- ---------------- ---------------- ----------------
+
+---------------- ---------------- ---------------- ----------------
+
