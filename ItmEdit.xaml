@@ -1,0 +1,198 @@
+﻿<Window x:Class="SekaiNi.ItmEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SekaiNi"
+        mc:Ignorable="d"
+        Title="ItmEdit" Height="800" Width="1400">
+    <StackPanel>
+
+        <!-- #region Window Menu Bar -->
+        <Menu Height="28">
+            <MenuItem Header="File" FontSize="16" Margin="10 2 0 0">
+                <MenuItem Header="Save" Click="MenuItemSave_Click"/>
+                <Separator/>
+                <MenuItem Header="Load" Click="MenuItemLoad_Click"/>
+            </MenuItem>
+        </Menu>
+        <!-- #endregion -->
+
+        <!-- #region Title Block -->
+        <Border Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="674*"/>
+                    <ColumnDefinition Width="457*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- #region Name TextBox -->
+                <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbName" Grid.Column="0" Margin="0,21,10,0.163"
+                         FontSize="40" FontFamily="Algerian" Padding="5"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding ViewItem.Name, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+                <!-- #region Description TextBox -->
+                <TextBlock Text="Description" Grid.Column="3" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
+                <Border Name="Placeholder" Grid.Column="3" Margin="0,21,0,0.163" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbDescription" Grid.Column="3"
+                         FontSize="12" Padding="10" Margin="0,21,10,0.163"
+                         VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                         Text="{Binding ViewItem.Description, Mode=TwoWay}" 
+                         VerticalScrollBarVisibility="Auto"
+                         MaxHeight="{Binding ElementName=Placeholder, Path=ActualHeight}" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+            </Grid>
+        </Border>
+        <!-- #endregion -->
+
+        <Separator Margin="3 0"/>
+        <Grid Margin="5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- #region Column 0-->
+            <StackPanel Grid.Column="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 0, 0 -->
+                    <TextBlock  Text="Unit Mass" FontSize="20" FontFamily="Algerian"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Width="100" FontSize="36" Text="{Binding ViewItem.Mass, Mode=TwoWay}"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Grid.Row="0" Grid.Column="1" Margin="0 10"/>
+                    
+                    <!-- 0, 1 -->
+                    <TextBlock  Text="Unit Value" FontSize="20" FontFamily="Algerian"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Grid.Row="0" Grid.Column="2"/>
+                    <TextBox Width="100" FontSize="36" Text="{Binding ViewItem.Value, Mode=TwoWay}"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Grid.Row="0" Grid.Column="3" Margin="0 10"/>
+                    
+                    <!-- 1, 0 -->
+                    <TextBlock  Text="Rarity" FontSize="20" FontFamily="Algerian"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Width="100" FontSize="36" Text="{Binding ViewItem.Rarity, Mode=TwoWay}"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Grid.Row="1" Grid.Column="1" Margin="0 10"/>
+                    
+                    <!-- 1, 1 -->
+                    <TextBlock  Text="Magic" FontSize="20" FontFamily="Algerian"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Grid.Row="1" Grid.Column="2"/>
+                    <TextBox Width="100" FontSize="36" Text="{Binding ViewItem.Magic, Mode=TwoWay}"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                             Grid.Row="1" Grid.Column="3" Margin="0 10"/>
+                    
+                    <!-- IsWeapon -->
+                    <TextBlock  Text="IsWeapon" FontSize="20" FontFamily="Algerian"
+                                    HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                Grid.Row="0" Grid.Column="4" />
+                    <CheckBox Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 10 0 0"/>
+                </Grid>
+            </StackPanel>
+            <!-- #endregion -->
+
+            <!-- #region Column 1-->
+            <StackPanel Grid.Column="1" Margin="5">
+
+                <!-- #region Notes List -->
+                <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Height="200" Padding="2"
+                              ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag}"/>
+                        <DataGridTextColumn Header="Text" Width="*" Binding="{Binding Text}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuItemEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuItemAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuItemDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion-->
+
+                <!-- #region Abilities List -->
+                <DataGrid Name="ListAbilities" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="200" Padding="2"
+                              ItemsSource="{Binding ViewItem.Abilities}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ability" Width="1.5*" Binding="{Binding Name, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Die#" Width=".5*" Binding="{Binding DieCount, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="d__" Width=".5*" Binding="{Binding DieSize, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="+" Width=".5*" Binding="{Binding DieBonus, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Chg." Width=".5*" Binding="{Binding Charges, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Rch." Width="*" Binding="{Binding Recharge, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuAbilityEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuAbilityAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuAbilityDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+                <!-- #region Inventory List -->
+                <DataGrid Name="ListAttacks" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="200" Padding="2"
+                              ItemsSource="{Binding ViewItem.Attacks}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Attack" Width="1.5*" Binding="{Binding Name, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Die#" Width=".5*" Binding="{Binding DieCount, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="d__" Width=".5*" Binding="{Binding DieSize, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="+" Width=".5*" Binding="{Binding DieBonus, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Chg." Width=".5*" Binding="{Binding Charges, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Rch." Width="*" Binding="{Binding Recharge, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuAttackEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuAttackAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuAttackDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+            </StackPanel>
+            <!-- #endregion -->
+
+
+        </Grid>
+    </StackPanel>
+</Window>

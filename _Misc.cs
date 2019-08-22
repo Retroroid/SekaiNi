@@ -56,7 +56,7 @@ namespace SekaiNi {
             }
         }
         private string _Text;
-        public Note() { }
+        public Note() { Title = "New note"; }
         public Note CloneObject() {
             return new Note {
                 Title = Title,
@@ -96,6 +96,16 @@ namespace SekaiNi {
             }
         }
         private string _Rank;
+        public string Title {
+            get { return _Title; }
+            set {
+                if (value != _Title) {
+                    _Title = value;
+                    OnPropertyChanged("Title");
+                }
+            }
+        }
+        private string _Title;
         public string Benefits {
             get { return _Benefits; }
             set {
@@ -116,7 +126,15 @@ namespace SekaiNi {
             }
         }
         private string _Duties;
-        public Accolade() { }
+        public Accolade() { Rank = "New Rank"; }
+        public Accolade CloneObject() {
+            return new Accolade {
+                Authority = Authority,
+                Rank = Rank,
+                Benefits = Benefits,
+                Duties = Duties
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]
@@ -148,7 +166,13 @@ namespace SekaiNi {
             }
         }
         private int _Value;
-        public Bonus() { }
+        public Bonus() { Source = "New Bonus"; }
+        public Bonus CloneObject() {
+            return new Bonus {
+                Source = Source,
+                Value = Value
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]
@@ -190,7 +214,25 @@ namespace SekaiNi {
             }
         }
         private string _CurrentShift;
-        public Occupation() { }
+        public Est Workplace {
+            get { return _Workplace; }
+            set {
+                if (Workplace != _Workplace) {
+                    _Workplace = Workplace;
+                    OnPropertyChanged("Workplace");
+                }
+            }
+        }
+        private Est _Workplace;
+        public Occupation() { Title = "New occupation"; }
+        public Occupation CloneObject() {
+            return new Occupation {
+                Employer = Employer,
+                Title = Title,
+                CurrentShift = CurrentShift,
+                Workplace = Workplace
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]
@@ -232,7 +274,14 @@ namespace SekaiNi {
             }
         }
         private string _Note;
-        public Service() { }
+        public Service() { Name = "New service"; }
+        public Service CloneObject() {
+            return new Service {
+                Name = Name,
+                Price = Price,
+                Note = Note
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]
@@ -254,6 +303,16 @@ namespace SekaiNi {
             }
         }
         private string _Name;
+        public Accolade Rank {
+            get { return _Rank; }
+            set {
+                if (Rank != _Rank) {
+                    _Rank = Rank;
+                    OnPropertyChanged("Rank");
+                }
+            }
+        }
+        private Accolade _Rank;
         public Mdl Module {
             get { return _Module; }
             set {
@@ -304,7 +363,17 @@ namespace SekaiNi {
             }
         }
         private string[] _Tags;
-        public Quest() { }
+        public Quest() { Name = "New quest"; }
+        public Quest CloneObject() {
+            return new Quest {
+                Name = Name,
+                Module = Module,
+                PostedBy = PostedBy,
+                Details = Details,
+                Reward = Reward,
+                Tags = Tags
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
     [Serializable]
@@ -326,6 +395,16 @@ namespace SekaiNi {
             }
         }
         private string _Name;
+        public string Tag {
+            get { return _Tag; }
+            set {
+                if (value != _Tag) {
+                    _Tag = value;
+                    OnPropertyChanged("Tag");
+                }
+            }
+        }
+        private string _Tag;
         public string Description {
             get { return _Description; }
             set {
@@ -386,7 +465,19 @@ namespace SekaiNi {
             }
         }
         private string _Recharge;
-        public Ability() { }
+        public Ability() { Name = "New ability"; }
+        public Ability CloneObject() {
+            return new Ability {
+                Name = Name,
+                Tag = Tag,
+                Description = Description,
+                DieSize = DieSize,
+                DieCount = DieCount,
+                DieBonus = DieBonus,
+                Charges = Charges,
+                Recharge = Recharge
+            };
+        }
     }
     // ---------------- ---------------- ---------------- //
 } // End of namespace

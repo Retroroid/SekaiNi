@@ -107,6 +107,22 @@ namespace SekaiNi {
             Imports = new List<Dot>();
         }
 
+        new public Loc CloneObject() {
+            return new Loc {
+                Name = Name,
+                Description = Description,
+                Notes = Notes,
+                Parent = Parent,
+                Population = Population,
+                Coordinates = Coordinates,
+                Characters = Characters,
+                Locations = Locations,
+                Establishments = Establishments,
+                Events = Events,
+                Exports = Exports,
+                Imports = Imports
+            };
+        }
         // ---------------- ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

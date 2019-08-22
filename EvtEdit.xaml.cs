@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace SekaiNi {
     /// <summary>
-    /// Interaction logic for ChaEdit.xaml
+    /// Interaction logic for EvtEdit.xaml
     /// </summary>
-    public partial class ChaEdit : Window, INotifyPropertyChanged {
+    public partial class EvtEdit : Window, INotifyPropertyChanged {
         // ---------------- Variables ---------------- ---------------- //
         #region Property Changed Event
         [field: NonSerialized]
@@ -27,7 +27,7 @@ namespace SekaiNi {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
-        public Cha ViewItem {
+        public Evt ViewItem {
             get { return _ViewItem; }
             set {
                 if (value != _ViewItem) {
@@ -36,20 +36,18 @@ namespace SekaiNi {
                 }
             }
         }
-        private Cha _ViewItem;
+        private Evt _ViewItem;
 
         // ---------------- Constructors ---------------- ---------------- //
-        public ChaEdit() {
-            ViewItem = new Cha();
+        public EvtEdit() {
+            ViewItem = new Evt();
             InitializeComponent();
             DataContext = this;
-            ListInventory.Columns[0].IsReadOnly = true;
         }
-        public ChaEdit(Cha ViewItem) {
+        public EvtEdit(Evt ViewItem) {
             this.ViewItem = ViewItem;
             InitializeComponent();
             DataContext = this;
-            ListInventory.Columns[0].IsReadOnly = true;
         }
         // ---------------- Methods ---------------- ---------------- //
         private void MenuItemSave_Click(object sender, RoutedEventArgs e) {
@@ -81,13 +79,15 @@ namespace SekaiNi {
                     str = str.Substring(3);
                 }
                 ViewItem.Name = str;
-                new ChaEdit(ViewItem.DeserializeFile()).Show();
+                new EvtEdit(ViewItem.DeserializeFile()).Show();
             }
         }
 
         #region Context Menu Base
         private void MenuItemEdit_Click(object sender, RoutedEventArgs e) {
-
+            //DataGrid dg = ((sender as MenuItem)
+            //    .Parent as ContextMenu)
+            //    .PlacementTarget as DataGrid;
         }
         private void MenuItemAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
@@ -101,79 +101,83 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            ViewItem.Notes.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex < ViewItem.Notes.Count) ViewItem.Notes.RemoveAt(dg.SelectedIndex);
             ListNotes.Items.Refresh();
         }
         #endregion
 
-        #region Context Menu Inventory
-        private void MenuItmEdit_Click(object sender, RoutedEventArgs e) {
+        #region Context Menu SubEvents
+        private void MenuSubEventsEdit_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Inventory.Count) new ItmEdit(dg.SelectedItem as Itm).Show();
+            if (dg.SelectedIndex < ViewItem.Characters.Count) new EvtEdit(dg.SelectedItem as Evt).Show();
         }
-        private void MenuItmAdd_Click(object sender, RoutedEventArgs e) {
+        private void MenuSubEventsAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Inventory.Count < 1 || dg.SelectedIndex >= ViewItem.Inventory.Count) ViewItem.Inventory.Add(new Itm());
-            else ViewItem.Inventory.Add((dg.SelectedItem as Itm).CloneObject());
-            ListInventory.Items.Refresh();
-
+            if (ViewItem.SubEvents.Count < 1 || dg.SelectedIndex >= ViewItem.SubEvents.Count) ViewItem.SubEvents.Add(new Evt());
+            else ViewItem.SubEvents.Add((dg.SelectedItem as Evt).CloneObject());
+            ListSubEvents.Items.Refresh();
         }
-        private void MenuItmDelete_Click(object sender, RoutedEventArgs e) {
+        private void MenuSubEventsDelete_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            ViewItem.Inventory.RemoveAt(dg.SelectedIndex);
-            ListInventory.Items.Refresh();
+            if (dg.SelectedIndex < ViewItem.SubEvents.Count) ViewItem.SubEvents.RemoveAt(dg.SelectedIndex);
+            ListSubEvents.Items.Refresh();
         }
         #endregion
 
-        #region Context Menu Ability
-        private void MenuAbilityEdit_Click(object sender, RoutedEventArgs e) {
-            //TODO
-        }
-        private void MenuAbilityAdd_Click(object sender, RoutedEventArgs e) {
+        #region Context Menu Characters
+        private void MenuCharactersEdit_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Abilities.Count < 1 || dg.SelectedIndex >= ViewItem.Abilities.Count) ViewItem.Abilities.Add(new Ability());
-            else ViewItem.Abilities.Add((dg.SelectedItem as Ability).CloneObject());
-            ListAbilities.Items.Refresh();
-
+            if (dg.SelectedIndex < ViewItem.Characters.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
         }
-        private void MenuAbilityDelete_Click(object sender, RoutedEventArgs e) {
+        private void MenuCharactersAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if(dg.SelectedIndex < ViewItem.Abilities.Count) ViewItem.Abilities.RemoveAt(dg.SelectedIndex);
-            ListAbilities.Items.Refresh();
+            if (ViewItem.Characters.Count < 1 || dg.SelectedIndex >= ViewItem.Characters.Count) ViewItem.Characters.Add(new Cha());
+            else ViewItem.Characters.Add((dg.SelectedItem as Cha).CloneObject());
+            ListCharacters.Items.Refresh();
+        }
+        private void MenuCharactersDelete_Click(object sender, RoutedEventArgs e) {
+            DataGrid dg = ((sender as MenuItem)
+                .Parent as ContextMenu)
+                .PlacementTarget as DataGrid;
+            if (dg.SelectedIndex < ViewItem.Characters.Count) ViewItem.Characters.RemoveAt(dg.SelectedIndex);
+            ListCharacters.Items.Refresh();
         }
         #endregion
 
-        #region Context Menu Attack
-        private void MenuAttackEdit_Click(object sender, RoutedEventArgs e) {
-            //TODO
-        }
-        private void MenuAttackAdd_Click(object sender, RoutedEventArgs e) {
+        #region Context Menu RandomEvents
+        private void MenuRandomEventsEdit_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Attacks.Count < 1 || dg.SelectedIndex >= ViewItem.Attacks.Count) ViewItem.Attacks.Add(new Ability());
-            else ViewItem.Attacks.Add((dg.SelectedItem as Ability).CloneObject());
-            ListAttacks.Items.Refresh();
-
+            if (dg.SelectedIndex < ViewItem.RandomEvents.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
         }
-        private void MenuAttackDelete_Click(object sender, RoutedEventArgs e) {
+        private void MenuRandomEventsAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Attacks.Count) ViewItem.Attacks.RemoveAt(dg.SelectedIndex);
-            ListAttacks.Items.Refresh();
+            if (ViewItem.RandomEvents.Count < 1 || dg.SelectedIndex >= ViewItem.RandomEvents.Count) ViewItem.RandomEvents.Add(new Doh());
+            else ViewItem.RandomEvents.Add((dg.SelectedItem as Doh).CloneObject());
+            ListRandomEvents.Items.Refresh();
+        }
+        private void MenuRandomEventsDelete_Click(object sender, RoutedEventArgs e) {
+            DataGrid dg = ((sender as MenuItem)
+                .Parent as ContextMenu)
+                .PlacementTarget as DataGrid;
+            if (dg.SelectedIndex < ViewItem.RandomEvents.Count) ViewItem.RandomEvents.RemoveAt(dg.SelectedIndex);
+            ListRandomEvents.Items.Refresh();
         }
         #endregion
+
         // ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="ChaEdit" Height="800" Width="1400">
+        Title="ChaEdit" Height="820" Width="1400">
     <StackPanel>
 
         <!-- #region Window Menu Bar -->
@@ -60,7 +60,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+
             </Grid.ColumnDefinitions>
 
             <!-- #region Column 0-->
@@ -185,9 +185,7 @@
                         <!-- #endregion -->
 
                     </StackPanel>
-
-
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Column="1" Margin="10 0">
 
                         <!-- AC, PB, Speed -->
                         <Grid Margin="10 0">
@@ -203,28 +201,32 @@
 
                             <TextBlock Text="PB" Grid.Row="0" Grid.Column="0" 
                                        FontSize="22" FontFamily="Algerian" Margin="20 0 0 0"/>
-                            <TextBox x:Name="tbPB" Width="70" Height="50"
-                                     Grid.Column="0" Grid.Row="1" Margin="10 0 0 0"
-                                     HorizontalAlignment="Left" Text="{Binding ViewItem.AC, Mode=TwoWay}"/>
+                            <TextBox x:Name="tbPB" Width="70" Height="50" 
+                                     Grid.Column="0" Grid.Row="1" Margin="10 0 0 0" FontSize="36"
+                                     HorizontalAlignment="Left" Text="{Binding ViewItem.AC, Mode=TwoWay}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
                             <TextBlock Text="AC" Grid.Row="0" Grid.Column="1" 
                                        FontSize="22" FontFamily="Algerian" Margin="20 0 0 0"/>
-                            <TextBox x:Name="tbAC" Width="70" Height="50"
+                            <TextBox x:Name="tbAC" Width="70" Height="50" FontSize="36"
                                      Grid.Column="1" Grid.Row="1" Margin="10 0 0 0"
-                                     HorizontalAlignment="Left"/>
+                                     HorizontalAlignment="Left" Text="{Binding ViewItem.AC, Mode=TwoWay}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
                             <TextBlock Text="Speed" Grid.Row="0" Grid.Column="3" 
                                        FontSize="22" FontFamily="Algerian"/>
                             <TextBox x:Name="tbSpeed" Width="70" Height="50"
                                      Grid.Column="3" Grid.Row="1" Margin="10 0 0 0"
-                                     HorizontalAlignment="Left"/>
+                                     HorizontalAlignment="Left" FontSize="36" Text="{Binding ViewItem.Speed, Mode=TwoWay}"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </Grid>
 
                         <!-- HP -->
                         <Canvas Margin="0 20 0 0" Height="130">
                             <TextBlock Text="HP" FontFamily="Algerian" FontSize="36" Canvas.Left="24" Canvas.Top="46"/>
                             <TextBox Width="90" Height="50" Canvas.Left="90" Canvas.Top="12"
-                                     Text="{Binding ViewItem.HPCurrent, Mode=TwoWay}"/>
+                                     Text="{Binding ViewItem.HPCurrent, Mode=TwoWay}" FontSize="36"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                             <Separator FontWeight="DemiBold" Height="84" Margin="0" Canvas.Top="28" Width="90" RenderTransformOrigin="0.5,0.5" Canvas.Left="142">
                                 <Separator.RenderTransform>
                                     <TransformGroup>
@@ -236,9 +238,52 @@
                                 </Separator.RenderTransform>
                             </Separator>
                             <TextBox Width="90" Height="50" Canvas.Left="201" Canvas.Top="70"
-                                     Text="{Binding ViewItem.HPMax, Mode=TwoWay}"/>
+                                     Text="{Binding ViewItem.HPMax, Mode=TwoWay}" FontSize="36"
+                                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                         </Canvas>
 
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Occupation" FontSize="14"/>
+                            <TextBox Grid.Row="1" Grid.Column="0" FontSize="18" 
+                             Text="{Binding ViewItem.Occupation.Title, Mode=TwoWay}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="Workplace" FontSize="14"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" Text="{Binding ViewItem.Occupation.Workplace.Name}"/>
+                        </Grid>
+
+                        <DataGrid Name="ListAccolades" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Accolades}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Rank" Width="*" Binding="{Binding Rank, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Title" Width="2*" Binding="{Binding Title, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="From" Width="2*" Binding="{Binding Authority.Name}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Edit" Click="MenuItmEdit_Click"/>
+                                    <MenuItem Header="Add" Click="MenuItmAdd_Click"/>
+                                    <MenuItem Header="DESTROY" Click="MenuItmDelete_Click"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                        </DataGrid>
+
+                        <TextBlock Text="Current Location"/>
+                        <TextBox Text="{Binding ViewItem.Location.Name, Mode=OneWay}" Margin="0 0 0 5" MaxLines="1"
+                                 Padding="3"/>
+
+                        <TextBlock Text="Current Activity"/>
+                        <TextBox Text="{Binding ViewItem.Location.Name, Mode=TwoWay}" Margin="0 0 0 5" Height="130"
+                                 Padding="3"/>
                     </StackPanel>
 
                 </Grid>
@@ -246,34 +291,106 @@
             <!-- #endregion -->
 
             <!-- #region Column 1-->
+            <StackPanel Grid.Column="1">
 
-            <!-- #region Notes List -->
-            <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
-                          FontSize="12" Grid.Column="1" Height="150" Padding="2"
+                <!-- #region Notes List -->
+                <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="150" Padding="2"
                               ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False"
                       VerticalAlignment="Top">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Note" Width="90" Binding="{Binding Title}"/>
-                    <DataGridTextColumn Header="Date" Width="90" Binding="{Binding Time}"/>
-                    <DataGridTextColumn Header="Tag" Width="90" Binding="{Binding Tag}"/>
-                    <DataGridTextColumn Header="Text" Width="290" Binding="{Binding Text}"/>
-                </DataGrid.Columns>
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Edit" Click="MenuItemEdit_Click"/>
-                        <MenuItem Header="Add" Click="MenuItemAdd_Click"/>
-                        <MenuItem Header="DESTROY" Click="MenuItemDelete_Click"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-            </DataGrid>
-            <!-- #endregion-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Title, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Time, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Text" Width="*" Binding="{Binding Text, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuItemEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuItemAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuItemDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion-->
 
+                <!-- #region Inventory List -->
+                <DataGrid Name="ListInventory" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Inventory}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Item" Width="4*" Binding="{Binding Name, Mode=OneWay}"/>
+                        <DataGridTextColumn Header="Type" Width="3*" Binding="{Binding ItemType, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Qty" Width="*" Binding="{Binding Quantity, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Note" Width="7*"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuItmEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuItmAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuItmDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+                <!-- #region Abilities List -->
+                <DataGrid Name="ListAbilities" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Abilities}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ability" Width="1.5*" Binding="{Binding Name, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Die#" Width=".5*" Binding="{Binding DieCount, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="d__" Width=".5*" Binding="{Binding DieSize, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="+" Width=".5*" Binding="{Binding DieBonus, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Chg." Width=".5*" Binding="{Binding Charges, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Rch." Width="*" Binding="{Binding Recharge, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuAbilityEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuAbilityAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuAbilityDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+                <!-- #region Inventory List -->
+                <DataGrid Name="ListAttacks" HorizontalAlignment="Left" Margin="0, 3" 
+                          FontSize="12" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Attacks}" AutoGenerateColumns="False"
+                      VerticalAlignment="Top">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Attack" Width="1.5*" Binding="{Binding Name, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Die#" Width=".5*" Binding="{Binding DieCount, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="d__" Width=".5*" Binding="{Binding DieSize, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="+" Width=".5*" Binding="{Binding DieBonus, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Chg." Width=".5*" Binding="{Binding Charges, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Rch." Width="*" Binding="{Binding Recharge, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuAttackEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuAttackAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuAttackDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+
+            </StackPanel>
             <!-- #endregion -->
 
             <!-- #region Column 2-->
-
-
-
+            <StackPanel Grid.Column="2" Margin="5 0">
+                
+            </StackPanel>
             <!-- #endregion -->
         </Grid>
     </StackPanel>

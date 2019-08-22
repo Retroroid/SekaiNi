@@ -88,6 +88,14 @@ namespace SekaiNi {
             Notes = new List<Note>();
         }
 
+        public Dot CloneObject() {
+            return new Dot {
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Notes = Notes
+            };
+        }
         // ---------------- Methods ---------------- ---------------- //
         #region Implementation / Override
         public int CompareTo(Dot obj) {

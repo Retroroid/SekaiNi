@@ -44,11 +44,6 @@ namespace SekaiNi {
             ViewItem = new Dot();
             InitializeComponent();
             DataContext = this;
-
-            ViewItem.Notes.Add(new Note { Title = "Note 1 Name!", Time = "Note 1 Time!", Tag = "Note 1 Tag!", Text = "Note 1 Text!" });
-            ViewItem.Notes.Add(new Note { Title = "Note 2 Name!", Time = "Note 2 Time!", Tag = "Note 2 Tag!", Text = "Note 2 Text!" });
-            ViewItem.Notes.Add(new Note { Title = "Note 3 Name!", Time = "Note 3 Time!", Tag = "Note 3 Tag!", Text = "Note 3 Text!" });
-            ViewItem.Notes.Add(new Note { Title = "Note 4 Name!", Time = "Note 4 Time!", Tag = "Note 4 Tag!", Text = "Note 4 Text!" });
         }
         public Templater(Dot ViewItem) {
             this.ViewItem = ViewItem;
@@ -90,20 +85,23 @@ namespace SekaiNi {
         }
         #region Context Menu Base
         private void MenuItemEdit_Click(object sender, RoutedEventArgs e) {
-
+            DataGrid dg = ((sender as MenuItem)
+                .Parent as ContextMenu)
+                .PlacementTarget as DataGrid;
         }
         private void MenuItemAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            ViewItem.Notes.Add((dg.SelectedItem as Note).CloneObject());
+            if (ViewItem.Notes.Count < 1 || dg.SelectedIndex >= ViewItem.Notes.Count) ViewItem.Notes.Add(new Note());
+            else ViewItem.Notes.Add((dg.SelectedItem as Note).CloneObject());
             ListNotes.Items.Refresh();
         }
         private void MenuItemDelete_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            ViewItem.Notes.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex < ViewItem.Notes.Count) ViewItem.Notes.RemoveAt(dg.SelectedIndex);
             ListNotes.Items.Refresh();
         }
         #endregion

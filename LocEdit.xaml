@@ -1,0 +1,213 @@
+﻿<Window x:Class="SekaiNi.LocEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SekaiNi"
+        mc:Ignorable="d"
+        Title="LocEdit" Height="800" Width="1400">
+    <StackPanel>
+
+        <!-- #region Window Menu Bar -->
+        <Menu Height="28">
+            <MenuItem Header="File" FontSize="16" Margin="10 2 0 0">
+                <MenuItem Header="Save" Click="MenuItemSave_Click"/>
+                <Separator/>
+                <MenuItem Header="Load" Click="MenuItemLoad_Click"/>
+            </MenuItem>
+        </Menu>
+        <!-- #endregion -->
+
+        <!-- #region Title Block -->
+        <Border Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="674*"/>
+                    <ColumnDefinition Width="457*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- #region Name TextBox -->
+                <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbName" Grid.Column="0" Margin="0,21,10,0.163"
+                         FontSize="40" FontFamily="Algerian" Padding="5"
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                         Text="{Binding ViewItem.Name, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+
+                <!-- #region Description TextBox -->
+                <TextBlock Text="Description" Grid.Column="3" Grid.Row="0" Margin="10,0,0,69.163"
+                           FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
+                <Border Name="Placeholder" Grid.Column="3" Margin="0,21,0,0.163" Grid.RowSpan="2"/>
+                <TextBox x:Name="tbDescription" Grid.Column="3"
+                         FontSize="12" Padding="10" Margin="0,21,10,0.163"
+                         VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
+                         TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True"
+                         Text="{Binding ViewItem.Description, Mode=TwoWay}" 
+                         VerticalScrollBarVisibility="Auto"
+                         MaxHeight="{Binding ElementName=Placeholder, Path=ActualHeight}" Grid.RowSpan="2"/>
+                <!-- #endregion -->
+            </Grid>
+        </Border>
+        <!-- #endregion -->
+
+        <Separator Margin="3 0"/>
+        <Grid Margin="5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- #region Column 0-->
+            <StackPanel Grid.Column="0" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- #region Locations List -->
+                    <DataGrid Name="ListLocations" HorizontalAlignment="Left" Margin="0, 5 5 5" 
+                          FontSize="12" Height="150" Padding="2" Grid.Column="0"
+                              ItemsSource="{Binding ViewItem.Locations}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Name}"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Edit" Click="MenuLocationsEdit_Click"/>
+                                <MenuItem Header="Add" Click="MenuLocationsAdd_Click"/>
+                                <MenuItem Header="DESTROY" Click="MenuLocationsDelete_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                    <!-- #endregion-->
+                    
+                    <!-- #region Establishments -->
+                    <DataGrid Name="ListEstablishments" HorizontalAlignment="Left" Margin="5, 5 0 5"  
+                          FontSize="12" Height="150" Padding="2" Grid.Column="1"
+                              ItemsSource="{Binding ViewItem.Establishments}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Establishment" Width="*" Binding="{Binding Name}"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Edit" Click="MenuEstablishmentsEdit_Click"/>
+                                <MenuItem Header="Add" Click="MenuEstablishmentsAdd_Click"/>
+                                <MenuItem Header="DESTROY" Click="MenuEstablishmentsDelete_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                    <!-- #endregion -->
+                </Grid>
+                     
+                <!-- #region Characters -->
+                <DataGrid Name="ListCharacters" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Characters}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Character" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Position" Width="*" Binding="{Binding Occupation.Title}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuCharactersEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuCharactersAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuCharactersDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+            </StackPanel>
+            <!-- #endregion -->
+
+            <!-- #region Column 1-->
+            <StackPanel Grid.Column="1" Margin="5">
+                
+                <!-- #region Notes List -->
+                <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Tag" Width="*" Binding="{Binding Tag}"/>
+                        <DataGridTextColumn Header="Text" Width="*" Binding="{Binding Text}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuItemEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuItemAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuItemDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion-->
+
+                <!-- #region Events -->
+                <DataGrid Name="ListEvents" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.Events}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Event" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="When" Width="*"/>
+                        <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location.Name}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuEventsEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuEventsAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuEventsDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+
+                <!-- #region Imports -->
+                <DataGrid Name="ListImports" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="120" Padding="2"
+                              ItemsSource="{Binding ViewItem.Imports}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Import" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="From" Width="*" Binding="{Binding Location.Name}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuImportsEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuImportsAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuImportsDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+                
+                <!-- #region Exports -->
+                <DataGrid Name="ListExports" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="120" Padding="2"
+                              ItemsSource="{Binding ViewItem.Exports}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Export" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="To" Width="*" Binding="{Binding Location.Name}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuExportsEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuExportsAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuExportsDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+                
+            </StackPanel>
+            <!-- #endregion -->
+
+        </Grid>
+    </StackPanel>
+</Window>

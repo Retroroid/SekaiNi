@@ -46,6 +46,13 @@ namespace SekaiNi {
             RandomEvents = new List<Doh>();
         }
 
+        new public Evt CloneObject() {
+            return new Evt {
+                SubEvents = SubEvents,
+                Characters = Characters,
+                RandomEvents = RandomEvents
+            };
+        }
         // ---------------- ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

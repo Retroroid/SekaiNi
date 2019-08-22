@@ -27,8 +27,26 @@ namespace SekaiNi {
         private void D100Edit_Open(object sender, RoutedEventArgs e) {
             new DohEdit().Show();
         }
-        private void Editor_Open(object sender, RoutedEventArgs e) {
-            new Templater().Show();
+        private void EstEdit_Open(object sender, RoutedEventArgs e) {
+            new EstEdit().Show();
+        }
+        private void EvtEdit_Open(object sender, RoutedEventArgs e) {
+            new EvtEdit().Show();
+        }
+        private void FacEdit_Open(object sender, RoutedEventArgs e) {
+            new FacEdit().Show();
+        }
+        private void GhlEdit_Open(object sender, RoutedEventArgs e) {
+            new GhlEdit().Show();
+        }
+        private void ItmEdit_Open(object sender, RoutedEventArgs e) {
+            new ItmEdit().Show();
+        }
+        private void LocEdit_Open(object sender, RoutedEventArgs e) {
+            new LocEdit().Show();
+        }
+        private void MdlEdit_Open(object sender, RoutedEventArgs e) {
+            new MdlEdit().Show();
         }
     }
 }

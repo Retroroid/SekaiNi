@@ -78,7 +78,20 @@ namespace SekaiNi {
             Groups = new List<Fac>();
             Ranks = new List<Accolade>();
         }
-
+        new public Fac CloneObject() {
+            return new Fac {
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Notes = Notes,
+                Focus = Focus,
+                Locations = Locations,
+                Authority = Authority,
+                Members = Members,
+                Groups = Groups,
+                Ranks = Ranks
+            };
+        }
         // ---------------- ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

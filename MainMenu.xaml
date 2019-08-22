@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainMenu" Height="450" Width="800">
     <StackPanel Margin="10" >
-        <TextBlock Text="Sekai" FontFamily="Algerian" FontSize="70" Margin="30 0 0 0"/>
+        <TextBlock Text="Sekai" FontFamily="Algerian" FontSize="70" Margin="40 0 0 0"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -16,28 +16,38 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <!-- Column 1 -->
+            <!-- Column 0 -->
             <StackPanel Grid.Column="0">
-                <Button Content="Character" Width="130" Height="30" Margin="0 20" 
+                <Button Content="Character" Width="140" Height="40" Margin="0 20" 
                         FontSize="18" FontFamily="Algerian" Click="ChaEdit_Open"/>
+                <Button Content="Item" Width="140" Height="40" Margin="0 20" 
+                        FontSize="18" FontFamily="Algerian" Click="ItmEdit_Open"/>
+                <Button Content="Location" Width="140" Height="40" Margin="0 20" 
+                        FontSize="18" FontFamily="Algerian" Click="LocEdit_Open"/>
             </StackPanel>
-            <!-- Column 2 -->
+            
+            <!-- Column 1 -->
             <StackPanel Grid.Column="1">
-                <!-- TODO -->
+                <Button Content="Faction" Width="140" Height="40" Margin="0 20" 
+                        FontSize="16" FontFamily="Algerian" Click="FacEdit_Open"/>
+                <Button Content="Establishment" Width="140" Height="40" Margin="0 20" 
+                        FontSize="16" FontFamily="Algerian" Click="EstEdit_Open"/>
+                <Button Content="Guildhall" Width="140" Height="40" Margin="0 20" 
+                        FontSize="16" FontFamily="Algerian" Click="GhlEdit_Open"/>
             </StackPanel>
-            <!-- Column 3 -->
+            
+            <!-- Column 2 -->
             <StackPanel Grid.Column="2">
-                <!-- TODO -->
+                <Button Content="Module" Width="140" Height="40" Margin="0 20" 
+                        FontSize="16" FontFamily="Algerian" Click="MdlEdit_Open"/>
+                <Button Content="Event" Width="140" Height="40" Margin="0 20" 
+                        FontSize="16" FontFamily="Algerian" Click="EvtEdit_Open"/>
             </StackPanel>
-            <!-- Column 4 -->
+            
+            <!-- Column 3 -->
             <StackPanel Grid.Column="3">
-                <!-- TODO -->
-                <StackPanel Grid.Column="0">
-                    <Button Content="d100" Width="130" Height="30" Margin="0 20" 
+                <Button Content="d100" Width="140" Height="40" Margin="0 20" 
                         FontSize="18" FontFamily="Algerian" Click="D100Edit_Open"/>
-                    <Button Content="Debug" Width="130" Height="30" Margin="0 20" 
-                        FontSize="18" FontFamily="Algerian" Click="Editor_Open"/>
-                </StackPanel>
             </StackPanel>
         </Grid>
     </StackPanel>

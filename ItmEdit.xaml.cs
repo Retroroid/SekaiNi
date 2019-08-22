@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 
 namespace SekaiNi {
     /// <summary>
-    /// Interaction logic for ChaEdit.xaml
+    /// Interaction logic for ItmEdit.xaml
     /// </summary>
-    public partial class ChaEdit : Window, INotifyPropertyChanged {
+    public partial class ItmEdit : Window, INotifyPropertyChanged {
         // ---------------- Variables ---------------- ---------------- //
         #region Property Changed Event
         [field: NonSerialized]
@@ -27,7 +27,7 @@ namespace SekaiNi {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nam));
         }
         #endregion
-        public Cha ViewItem {
+        public Itm ViewItem {
             get { return _ViewItem; }
             set {
                 if (value != _ViewItem) {
@@ -36,20 +36,18 @@ namespace SekaiNi {
                 }
             }
         }
-        private Cha _ViewItem;
+        private Itm _ViewItem;
 
         // ---------------- Constructors ---------------- ---------------- //
-        public ChaEdit() {
-            ViewItem = new Cha();
+        public ItmEdit() {
+            ViewItem = new Itm();
             InitializeComponent();
             DataContext = this;
-            ListInventory.Columns[0].IsReadOnly = true;
         }
-        public ChaEdit(Cha ViewItem) {
+        public ItmEdit(Itm ViewItem) {
             this.ViewItem = ViewItem;
             InitializeComponent();
             DataContext = this;
-            ListInventory.Columns[0].IsReadOnly = true;
         }
         // ---------------- Methods ---------------- ---------------- //
         private void MenuItemSave_Click(object sender, RoutedEventArgs e) {
@@ -81,7 +79,7 @@ namespace SekaiNi {
                     str = str.Substring(3);
                 }
                 ViewItem.Name = str;
-                new ChaEdit(ViewItem.DeserializeFile()).Show();
+                new ItmEdit(ViewItem.DeserializeFile()).Show();
             }
         }
 
@@ -101,33 +99,8 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            ViewItem.Notes.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex < ViewItem.Notes.Count) ViewItem.Notes.RemoveAt(dg.SelectedIndex);
             ListNotes.Items.Refresh();
-        }
-        #endregion
-
-        #region Context Menu Inventory
-        private void MenuItmEdit_Click(object sender, RoutedEventArgs e) {
-            DataGrid dg = ((sender as MenuItem)
-                .Parent as ContextMenu)
-                .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Inventory.Count) new ItmEdit(dg.SelectedItem as Itm).Show();
-        }
-        private void MenuItmAdd_Click(object sender, RoutedEventArgs e) {
-            DataGrid dg = ((sender as MenuItem)
-                .Parent as ContextMenu)
-                .PlacementTarget as DataGrid;
-            if (ViewItem.Inventory.Count < 1 || dg.SelectedIndex >= ViewItem.Inventory.Count) ViewItem.Inventory.Add(new Itm());
-            else ViewItem.Inventory.Add((dg.SelectedItem as Itm).CloneObject());
-            ListInventory.Items.Refresh();
-
-        }
-        private void MenuItmDelete_Click(object sender, RoutedEventArgs e) {
-            DataGrid dg = ((sender as MenuItem)
-                .Parent as ContextMenu)
-                .PlacementTarget as DataGrid;
-            ViewItem.Inventory.RemoveAt(dg.SelectedIndex);
-            ListInventory.Items.Refresh();
         }
         #endregion
 
@@ -148,7 +121,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if(dg.SelectedIndex < ViewItem.Abilities.Count) ViewItem.Abilities.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex < ViewItem.Abilities.Count) ViewItem.Abilities.RemoveAt(dg.SelectedIndex);
             ListAbilities.Items.Refresh();
         }
         #endregion
@@ -177,3 +150,4 @@ namespace SekaiNi {
         // ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace
+

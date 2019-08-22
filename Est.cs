@@ -45,6 +45,24 @@ namespace SekaiNi {
             Services = new List<Service>();
         }
 
+        new public Est CloneObject() {
+            return new Est {
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Notes = Notes,
+                Faction = Faction,
+                Staff = Staff,
+                Services = Services,
+                Focus = Focus,
+                Locations = Locations,
+                Authority = Authority,
+                Members = Members,
+                Groups = Groups,
+                Ranks = Ranks
+            };
+        }
+
         // ---------------- ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

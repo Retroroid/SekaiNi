@@ -131,6 +131,16 @@ namespace SekaiNi {
         }
         #endregion
 
+        new public Doh CloneObject() {
+            return new Doh {
+                Elements = Elements,
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Notes = Notes,
+            };
+        }
+
         // ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

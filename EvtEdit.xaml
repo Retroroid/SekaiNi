@@ -1,11 +1,11 @@
-﻿<Window x:Class="SekaiNi.Templater"
+﻿<Window x:Class="SekaiNi.EvtEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="Templater" Height="800" Width="1400">
+        Title="EvtEdit" Height="800" Width="1400">
     <StackPanel>
 
         <!-- #region Window Menu Bar -->
@@ -30,7 +30,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
                 <!-- #region Name TextBox -->
                 <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Margin="10,0,0,69.163"
                            FontSize="16" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
@@ -39,7 +38,6 @@
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                          Text="{Binding ViewItem.Name, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
                 <!-- #endregion -->
-                
                 <!-- #region Description TextBox -->
                 <TextBlock Text="Description" Grid.Column="3" Grid.Row="0" Margin="10,0,0,69.163"
                            FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
@@ -68,7 +66,7 @@
                 
                 <!-- #region Notes List -->
                 <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
-                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                          FontSize="12" Grid.Column="0" Height="250" Padding="2"
                               ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Title}"/>
@@ -86,13 +84,67 @@
                 </DataGrid>
                 <!-- #endregion-->
 
+                <!-- #region Sub-Events -->
+                <DataGrid Name="ListSubEvents" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.SubEvents}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Event" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location.Name}"/>
+                        <DataGridTextColumn Header="Time" Width="*"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuSubEventsEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuSubEventsAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuSubEventsDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
 
+                <!-- #region Random Events -->
+                <DataGrid Name="ListRandomEvents" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                              ItemsSource="{Binding ViewItem.RandomEvents}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="List" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location.Name}"/>
+                        <DataGridTextColumn Header="Time" Width="*"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuRandomEventsEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuRandomEventsAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuRandomEventsDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
+                
             </StackPanel>
-            <!-- #endregion -->
 
             <!-- #region Column 1-->
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" Margin="0, 5">
+                <!-- #region Characters -->
+                <DataGrid Name="ListCharacters" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="250" Padding="2"
+                              ItemsSource="{Binding ViewItem.Characters}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Character" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location.Name}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuCharactersEdit_Click"/>
+                            <MenuItem Header="Add" Click="MenuCharactersAdd_Click"/>
+                            <MenuItem Header="DESTROY" Click="MenuCharactersDelete_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+                <!-- #endregion -->
 
+               
             </StackPanel>
             <!-- #endregion -->
 

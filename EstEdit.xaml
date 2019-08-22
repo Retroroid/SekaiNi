@@ -1,11 +1,11 @@
-﻿<Window x:Class="SekaiNi.Templater"
+﻿<Window x:Class="SekaiNi.EstEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SekaiNi"
         mc:Ignorable="d"
-        Title="Templater" Height="800" Width="1400">
+        Title="EstEdit" Height="800" Width="1400">
     <StackPanel>
 
         <!-- #region Window Menu Bar -->
@@ -30,7 +30,6 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
                 <!-- #region Name TextBox -->
                 <TextBlock Text="Name" Grid.Column="0" Grid.Row="0" Margin="10,0,0,69.163"
                            FontSize="16" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
@@ -39,7 +38,6 @@
                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                          Text="{Binding ViewItem.Name, Mode=TwoWay}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
                 <!-- #endregion -->
-                
                 <!-- #region Description TextBox -->
                 <TextBlock Text="Description" Grid.Column="3" Grid.Row="0" Margin="10,0,0,69.163"
                            FontSize="16" FontWeight="DemiBold" Grid.RowSpan="2"/>
@@ -65,10 +63,9 @@
 
             <!-- #region Column 0-->
             <StackPanel Grid.Column="0" Margin="5">
-                
                 <!-- #region Notes List -->
                 <DataGrid Name="ListNotes" HorizontalAlignment="Left" Margin="0, 5" 
-                          FontSize="12" Grid.Column="0" Height="150" Padding="2"
+                          FontSize="12" Grid.Column="0" Height="190" Padding="2"
                               ItemsSource="{Binding ViewItem.Notes}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Title}"/>
@@ -86,13 +83,38 @@
                 </DataGrid>
                 <!-- #endregion-->
 
+                <!-- #region Staff List -->
+                <DataGrid Name="ListStaff" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="190" Padding="2"
+                              ItemsSource="{Binding ViewItem.Staff}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridCheckBoxColumn Header="On Duty" Width=".2*"/>
+                        <DataGridTextColumn Header="Staff" Width="*" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Position" Width="*" Binding="{Binding Occupation.Title}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!-- #endregion -->
 
+                <!-- #region Service List -->
+                <DataGrid Name="ListServices" HorizontalAlignment="Left" Margin="0, 5" 
+                          FontSize="12" Grid.Column="0" Height="190" Padding="2"
+                              ItemsSource="{Binding ViewItem.Services}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price, Mode=TwoWay}"/>
+                        <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note, Mode=TwoWay}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!-- #endregion -->
+                
             </StackPanel>
             <!-- #endregion -->
 
             <!-- #region Column 1-->
-            <StackPanel Grid.Column="1">
-
+            <StackPanel Grid.Column="1" Margin="20">
+                <TextBlock Text="Faction" FontFamily="Algerian" FontSize="28"/>
+                <TextBlock Text="{Binding ViewItem.Faction.Name, Mode=OneWay}"
+                           FontFamily="Algerian" FontSize="38" Margin="0 0 0 20"/>
             </StackPanel>
             <!-- #endregion -->
 

@@ -273,6 +273,33 @@ namespace SekaiNi {
             Accolades = new List<Accolade>();
         }
 
+        new public Cha CloneObject() {
+            return new Cha {
+                Name = Name,
+                Description = Description,
+                Location = Location,
+                Notes = Notes,
+                STR = STR,
+                DEX = DEX,
+                CON = CON,
+                INT = INT,
+                WIS = WIS,
+                CHA = CHA,
+                Skills = Skills,
+                HPCurrent = HPCurrent,
+                HPMax = HPMax,
+                PB = PB,
+                AC = AC,
+                Speed = Speed,
+                Activity = Activity,
+                Occupation = Occupation,
+                Relationships = Relationships,
+                Inventory = Inventory,
+                Attacks = Attacks,
+                Abilities = Abilities,
+                Accolades = Accolades
+            };
+        }
         // ---------------- ---------------- ---------------- ---------------- //
     } // End of class
     // ---------------- ---------------- ---------------- //

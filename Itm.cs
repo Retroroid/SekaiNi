@@ -104,6 +104,21 @@ namespace SekaiNi {
             Abilities = new List<Ability>();
         }
 
+        // ---------------- Methods ---------------- ---------------- //
+        new public Itm CloneObject() {
+            return new Itm {
+                ItemType = ItemType,
+                Mass = Mass,
+                Value = Value,
+                Rarity = Rarity,
+                Magic = Magic,
+                Quantity = Quantity,
+                IsWeapon = IsWeapon,
+                Attacks = Attacks,
+                Abilities = Abilities
+            };
+        }
+
         // ---------------- ---------------- ---------------- ---------------- ---------------- //
     } // End of class
 } // End of namespace

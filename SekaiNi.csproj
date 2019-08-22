@@ -78,17 +78,38 @@
     <Compile Include="DataGridEditItem.xaml.cs">
       <DependentUpon>DataGridEditItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EstEdit.xaml.cs">
+      <DependentUpon>EstEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EvtEdit.xaml.cs">
+      <DependentUpon>EvtEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Fac.cs" />
     <Compile Include="Cha.cs" />
     <Compile Include="Evt.cs" />
     <Compile Include="Est.cs" />
+    <Compile Include="FacEdit.xaml.cs">
+      <DependentUpon>FacEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ghl.cs" />
+    <Compile Include="GhlEdit.xaml.cs">
+      <DependentUpon>GhlEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Itm.cs" />
+    <Compile Include="ItmEdit.xaml.cs">
+      <DependentUpon>ItmEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Loc.cs" />
+    <Compile Include="LocEdit.xaml.cs">
+      <DependentUpon>LocEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Mdl.cs" />
+    <Compile Include="MdlEdit.xaml.cs">
+      <DependentUpon>MdlEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Templater.xaml.cs">
       <DependentUpon>Templater.xaml</DependentUpon>
     </Compile>
@@ -116,7 +137,35 @@
     </Compile>
     <Compile Include="Dot.cs" />
     <Compile Include="Extensions.cs" />
+    <Page Include="EstEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EvtEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FacEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GhlEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ItmEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LocEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MdlEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
