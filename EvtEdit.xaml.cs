@@ -111,13 +111,13 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Characters.Count) new EvtEdit(dg.SelectedItem as Evt).Show();
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Characters.Count) new EvtEdit(dg.SelectedItem as Evt).Show();
         }
         private void MenuSubEventsAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.SubEvents.Count < 1 || dg.SelectedIndex >= ViewItem.SubEvents.Count) ViewItem.SubEvents.Add(new Evt());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.Characters.Count) ViewItem.SubEvents.Add(new Evt());
             else ViewItem.SubEvents.Add((dg.SelectedItem as Evt).CloneObject());
             ListSubEvents.Items.Refresh();
         }
@@ -125,7 +125,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.SubEvents.Count) ViewItem.SubEvents.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Characters.Count) ViewItem.SubEvents.RemoveAt(dg.SelectedIndex);
             ListSubEvents.Items.Refresh();
         }
         #endregion
@@ -135,13 +135,13 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Characters.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Characters.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
         }
         private void MenuCharactersAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Characters.Count < 1 || dg.SelectedIndex >= ViewItem.Characters.Count) ViewItem.Characters.Add(new Cha());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.Characters.Count) ViewItem.Characters.Add(new Cha());
             else ViewItem.Characters.Add((dg.SelectedItem as Cha).CloneObject());
             ListCharacters.Items.Refresh();
         }
@@ -149,7 +149,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Characters.Count) ViewItem.Characters.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Characters.Count) ViewItem.Characters.RemoveAt(dg.SelectedIndex);
             ListCharacters.Items.Refresh();
         }
         #endregion
@@ -159,13 +159,13 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.RandomEvents.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.RandomEvents.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
         }
         private void MenuRandomEventsAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.RandomEvents.Count < 1 || dg.SelectedIndex >= ViewItem.RandomEvents.Count) ViewItem.RandomEvents.Add(new Doh());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.RandomEvents.Count) ViewItem.RandomEvents.Add(new Doh());
             else ViewItem.RandomEvents.Add((dg.SelectedItem as Doh).CloneObject());
             ListRandomEvents.Items.Refresh();
         }
@@ -173,7 +173,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.RandomEvents.Count) ViewItem.RandomEvents.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.RandomEvents.Count) ViewItem.RandomEvents.RemoveAt(dg.SelectedIndex);
             ListRandomEvents.Items.Refresh();
         }
         #endregion

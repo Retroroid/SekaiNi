@@ -116,7 +116,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Authority.Count < 1 || dg.SelectedIndex >= ViewItem.Authority.Count) ViewItem.Authority.Add(new Cha());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.Authority.Count) ViewItem.Authority.Add(new Cha());
             else ViewItem.Authority.Add((dg.SelectedItem as Cha).CloneObject());
             ListAuthority.Items.Refresh();
         }
@@ -124,7 +124,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Authority.Count) ViewItem.Authority.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >=0 && dg.SelectedIndex < ViewItem.Authority.Count) ViewItem.Authority.RemoveAt(dg.SelectedIndex);
             ListAuthority.Items.Refresh();
         }
         #endregion
@@ -134,13 +134,13 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Locations.Count) new LocEdit(dg.SelectedItem as Loc).Show();
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Locations.Count) new LocEdit(dg.SelectedItem as Loc).Show();
         }
         private void MenuLocationsAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Locations.Count < 1 || dg.SelectedIndex >= ViewItem.Locations.Count) ViewItem.Locations.Add(new Loc());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.Locations.Count) ViewItem.Locations.Add(new Loc());
             else ViewItem.Locations.Add((dg.SelectedItem as Loc).CloneObject());
             ListLocations.Items.Refresh();
         }
@@ -148,7 +148,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Locations.Count) ViewItem.Locations.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Locations.Count) ViewItem.Locations.RemoveAt(dg.SelectedIndex);
             ListLocations.Items.Refresh();
         }
         #endregion

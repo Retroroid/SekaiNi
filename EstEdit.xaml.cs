@@ -109,13 +109,13 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Staff.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Staff.Count) new ChaEdit(dg.SelectedItem as Cha).Show();
         }
         private void MenuStaffAdd_Click(object sender, RoutedEventArgs e) {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (ViewItem.Staff.Count < 1 || dg.SelectedIndex >= ViewItem.Staff.Count) ViewItem.Staff.Add(new Cha());
+            if (dg.SelectedIndex < 0 || dg.SelectedIndex >= ViewItem.Staff.Count) ViewItem.Staff.Add(new Cha());
             else ViewItem.Staff.Add((dg.SelectedItem as Cha).CloneObject());
             ListStaff.Items.Refresh();
         }
@@ -123,7 +123,7 @@ namespace SekaiNi {
             DataGrid dg = ((sender as MenuItem)
                 .Parent as ContextMenu)
                 .PlacementTarget as DataGrid;
-            if (dg.SelectedIndex < ViewItem.Staff.Count) ViewItem.Staff.RemoveAt(dg.SelectedIndex);
+            if (dg.SelectedIndex >= 0 && dg.SelectedIndex < ViewItem.Staff.Count) ViewItem.Staff.RemoveAt(dg.SelectedIndex);
             ListStaff.Items.Refresh();
         }
         #endregion
